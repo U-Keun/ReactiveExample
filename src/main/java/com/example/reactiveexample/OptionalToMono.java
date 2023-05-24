@@ -6,7 +6,9 @@ import java.util.Optional;
 
 public class OptionalToMono {
     public static void main(String[] args) {
-        Optional<String> optional = Optional.of("우근");
+//        Optional<String> optional = Optional.of("우근");
+
+        Optional<String> optional = Optional.empty();
 
         Mono<String> stringMono = Mono.justOrEmpty(optional).log();
 
