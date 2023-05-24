@@ -7,7 +7,7 @@ public class FirstFlux {
         // Flux는 publisher 역할
         Flux<String> stringFlux = Flux.just("우근", "현진", "승연", "정아")
                 .concatWithValues("16조")
-                .concatWith(Flux.just("챌린지팀"));
+                .concatWith(Flux.just("챌린지팀")).log();
 
 //        // Flux에 데이터를 직접추가
 //        stringFlux = stringFlux.concatWithValues("16조");
