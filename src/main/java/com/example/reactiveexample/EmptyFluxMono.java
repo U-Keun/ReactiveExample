@@ -10,9 +10,14 @@ public class EmptyFluxMono {
 
         emptyFlux.subscribe(System.out::println); // request(unbounded) -> onComplete()
 
+        String str = null;
+
+//        Mono<?> emptyMono = Mono.justOrEmpty(null).log();
+        Mono<?> emptyMono = Mono.justOrEmpty(str).log();
+
         // 빈 Mono 객체도 Flux와 똑같이 된다!
-        Mono<?> emptyMono = Mono.empty().log();
-//        Mono<?> emptyMono = Mono.just(null).log(); 이것도 안 됨.
+//        Mono<?> emptyMono = Mono.empty().log();
+////        Mono<?> emptyMono = Mono.just(null).log(); 이것도 안 됨.
 
         emptyMono.subscribe(System.out::println);
     }
