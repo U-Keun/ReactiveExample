@@ -15,9 +15,12 @@ public class BackPressureExample {
          *  아래의 코드는 이 코드에서 요청의 개수를 제한하도록 설정해보는 것이다.
          */
         integerFlux.subscribe(new BaseSubscriber<Integer>() {
-            // 구독해서 데이터를 불러올 때 요청을 5번만 하도록 설정할 수 있다.
+            // 구독해서 데이터를 불러올 때 요청을 몇 번 할 지 설정할 수 있다.
             protected void hookOnSubscribe(Subscription subscription) {
-                subscription.request(5);
+//                subscription.request(5); // 요청 5번만!
+                for (int i = 0; i < 5; i++) {
+                    subscription.request(2);
+                } // 요청을 2개씩 5번으로 나눠서 보내기
             }
             // 요청시 onNext 이벤트에서 값을 출력하도록 설정
             protected void hookOnNext(Integer value) {
