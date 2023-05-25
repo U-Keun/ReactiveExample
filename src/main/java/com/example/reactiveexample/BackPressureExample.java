@@ -24,6 +24,9 @@ public class BackPressureExample {
             }
             // 요청시 onNext 이벤트에서 값을 출력하도록 설정
             protected void hookOnNext(Integer value) {
+                if (value == 3) {
+                    cancel();
+                } // 3이라는 값을 받고 나서 나머지 요청들을 취소한다.
                 System.out.println(value);
             }
             // onComplete 이벤트 발생시 메시지 출력하도록 설정
