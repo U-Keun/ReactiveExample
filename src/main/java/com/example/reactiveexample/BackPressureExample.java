@@ -1,0 +1,37 @@
+package com.example.reactiveexample;
+
+import org.reactivestreams.Subscription;
+import reactor.core.publisher.BaseSubscriber;
+import reactor.core.publisher.Flux;
+
+public class BackPressureExample {
+    public static void main(String[] args) {
+        Flux<Integer> integerFlux = Flux.range(1, 10).log();
+
+        /*
+         * integerFlux.subscribe(System.out::println,
+         *      ex -> ex.printStackTrace(),
+         *      () -> System.out.println("Completed"));
+         *  아래의 코드는 이 코드에서 요청의 개수를 제한하도록 설정해보는 것이다.
+         */
+        integerFlux.subscribe(new BaseSubscriber<Integer>() {
+            // 구독해서 데이터를 불러올 때 요청을 5번만 하도록 설정할 수 있다.
+            protected void hookOnSubscribe(Subscription subscription) {
+                subscription.request(5);
+            }
+            // 요청시 onNext 이벤트에서 값을 출력하도록 설정
+            protected void hookOnNext(Integer value) {
+                System.out.println(value);
+            }
+            // onComplete 이벤트 발생시 메시지 출력하도록 설정
+            protected  void hookOnComplete() {
+                System.out.println("Completed");
+            } // 전체 데이터의 수는 10개인데, 5개만 요청했으므로 onComplete 이벤트가 발생하지 않는다.
+            // onError 이벤트 발생시 printStackTrace 메서드 실행하도록 설정
+            protected void hookOnError(Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+
+    }
+}
