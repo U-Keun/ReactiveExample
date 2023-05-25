@@ -1,4 +1,4 @@
-package com.example.reactiveexample;
+package com.example.reactiveexample.basicExamples;
 
 import reactor.core.publisher.Mono;
 

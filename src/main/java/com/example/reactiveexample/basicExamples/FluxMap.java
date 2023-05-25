@@ -1,4 +1,4 @@
-package com.example.reactiveexample;
+package com.example.reactiveexample.basicExamples;
 
 import com.example.reactiveexample.pojo.Order;
 import reactor.core.publisher.Flux;
